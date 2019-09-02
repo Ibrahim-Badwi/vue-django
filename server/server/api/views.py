@@ -1,4 +1,4 @@
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
@@ -24,7 +24,7 @@ class UserViewSet(ModelViewSet):
         IsAuthenticated,
     )
 
-    @detail_route(methods=['get'])
+    @action(detail=True, methods=['post'])
     def posts(self, request, pk=None):
         queryset = Post.objects.filter(author__pk=pk).order_by('-created')
 
